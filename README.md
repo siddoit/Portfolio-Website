@@ -48,7 +48,7 @@ To run this project locally, follow these steps:
 
 ## Deployment
 
-This portfolio is currently deployed on [e.g., GitHub Pages / Vercel]. You can view it live at:
+While this portfolio is my work in progress, my complete resume can viewed live at:
 [https://siddoit.github.io/](https://siddoit.github.io/)
 
 ## Contact
