@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth; /* Ensures smooth scroll for anchor links */
+  }
+
+  body {
+    @apply font-sans bg-light-background text-light-text dark:bg-darkTheme dark:text-dark-text;
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    display: flex; /* Useful for some full-height layout patterns if needed */
+    flex-direction: column; /* If footer needs to stick to bottom */
+  }
+
+  /* Apply to a wrapper around your main page content if body uses flex for sticky footer */
+  /* main, .main-content-wrapper { 
+    flex-grow: 1;
+  } */
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-inherit; /* Inherit color, set weight */
+  }
+  /* Example of slightly more distinct heading colors */
+  /* h1, h2, h3 { @apply text-gray-900 dark:text-white; } */
+  /* h4, h5, h6 { @apply text-gray-700 dark:text-gray-300; } */
+
+
+  a { /* Base link styling - you'll override this with specific button/nav link styles */
+    @apply text-light-primary dark:text-dark-primary transition-colors duration-200;
+  }
+  a:hover {
+    @apply text-light-primary-hover dark:text-dark-primary-hover underline; /* Example hover */
+  }
+
+  /* Scroll Margin for Fixed Navbar - ensure section IDs match exactly */
+  #top, #about, #services, #work, #contact {
+    scroll-margin-top: 6rem; /* Approx 96px - ADJUST TO YOUR ACTUAL FIXED NAVBAR HEIGHT */
+                               /* Measure your navbar height accurately when scrolled */
+  }
+
+  /* Accessible focus states - very important! */
+  :focus-visible { /* Modern standard for keyboard-only focus */
+    outline: 3px solid theme('colors.light-primary'); /* Use your theme's primary color */
+    outline-offset: 2px;
+    border-radius: 2px; /* Slight rounding on the outline */
+  }
+  .dark :focus-visible {
+    outline-color: theme('colors.dark-primary');
+  }
+  /* Remove default outline for mouse users when focus-visible is supported */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* Custom Scrollbar - Styled */
+@layer utilities {
+  /* Apply this class to the body or html element if desired */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 12px;  /* Slightly wider for easier interaction */
+    height: 12px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-neutral-800; 
+    /* No border-radius on track for a more standard look */
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-neutral-600 rounded-md; /* Rounded thumb */
+    border: 3px solid theme('colors.gray.100'); /* Creates a "track" effect around thumb */
+  }
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    border-color: theme('colors.neutral.800');
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-neutral-500;
+  }
+  
+  /* To apply custom scrollbar to the entire page: */
+  html.custom-scrollbar { /* If you add 'custom-scrollbar' class to html tag in layout.js */
+    /* Styles above will apply to <html> element if it has .custom-scrollbar class */
+  }
+}
